@@ -58,4 +58,29 @@ fi
 # Remove outdated versions from the cellar
 brew cleanup
 
+tesseract() {
+  #!/usr/bin/env bash
+  # courtesy of : <https://ryanfb.github.io/etc/2014/11/13/command_line_ocr_on_mac_os_x.html>
+
+  # Ensure `homebrew` is up-to-date and ready
+  echo "Updating `homebrew`..."
+  brew doctor
+
+  # Install leptonica with TIFF support (and every other format, just in case)
+  echo "Installing `leptonica`..."
+  brew install --with-libtiff --with-openjpeg --with-giflib leptonica
+
+  # Install Ghostscript
+  echo "Installing `ghostscript`..."
+  brew install gs
+
+  # Install ImageMagick with TIFF and Ghostscript support
+  echo "Installing `imagemagick`..."
+  brew install --with-libtiff --with-ghostscript imagemagick
+
+  # Install Tesseract devel with all languages
+  echo "Installing `tesseract`..."
+  brew install --devel --all-languages tesseract
+}
+
 exit 0
