@@ -42,6 +42,9 @@ binaries=(
   hub
 )
 
+# Install tesseract ocr engine and all dependencies
+tesseract
+
 # Install the binaries
 brew install ${binaries[@]}
 
