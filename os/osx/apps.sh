@@ -8,29 +8,40 @@ set -e
 apps=(
   alfred
   appcleaner
+  caffeine
+  copy
+  daisydisk
+  dash
   dropbox
+  evernote
   flux
   google-chrome
   hazel
   iterm2
   mailbox
+  marked
   nvalt
+  omnifocus
+  onepassword
   qlmarkdown
   qlstephen
   quicklook-json
   shiori
-  sketch
+  skim
   slack
+  spectacle
   sublime-text3
+  textexpander
   tower
   transmission
   transmit
   vlc
+  zotero
 )
 
 # fonts
 fonts=(
-  font-m-plus
+  font-inconsolata
   font-clear-sans
   font-roboto
 )
