@@ -31,6 +31,7 @@ binaries=(
   python
   python3
   poppler
+  pandoc
   trash
   tree
   wget
