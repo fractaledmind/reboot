@@ -76,7 +76,7 @@ boot() {
 
 # update either dots or OS
 update() {
-  if [[ -e "$os/$1/index.sh" ]]; then
+  if [[ -e "$os/$1/update.sh" ]]; then
     sh "$os/$1/update.sh"
   else
     updatedots
