@@ -18,6 +18,7 @@ apps=(
   google-chrome
   hazel
   iterm2
+  mactex
   mailbox
   marked
   nvalt
