@@ -19,7 +19,6 @@ osx="$os/osx"
 sh "$osx/defaults.sh"
 sh "$osx/binaries.sh"
 sh "$osx/apps.sh"
-sh "$osx/mackup.sh"
 
 # Symlink the profile
 if [[ ! -e "$HOME/.bash_profile" ]]; then
