@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="0.0.7"
+version="0.1.0"
 
 # dots(1) main
 main() {
@@ -30,11 +30,15 @@ main() {
       source "$HOME/.bash_profile"
       ;;
     boot )
-      boot $2
+      boot
+      exit
+      ;;
+    setup )
+      setup
       exit
       ;;
     update )
-      update $2
+      update
       exit
       ;;
     *)
@@ -57,27 +61,37 @@ usage() {
 
   Commands:
 
-    reload                  Reload the dotfiles
-    boot <os>               Bootstrap the given operating system
-    update <os|dots>        Update the os or dots
+    reload                Reload the dotfiles
+    boot                  Bootstrap the given operating system
+    setup                 Finish setup process after Dropbox sync
+    update <dots>         Update the os or dots
 
 EOF
 }
 
 # Bootstrap the OS
 boot() {
-  if [[ -e "$os/$1/index.sh" ]]; then
-    sh "$os/$1/index.sh"
+  if [[ -e "$os/osx/index.sh" ]]; then
+    sh "$os/osx/index.sh"
   else
-    echo "boot: could not find \"$1\""
+    echo "boot: could not find osx boot script!"
+    exit 1
+  fi
+}
+
+setup() {
+  if [[ -e "$os/osx/setup.sh" ]]; then
+    sh "$os/osx/setup.sh"
+  else
+    echo "setup: could not find osx setup script!"
     exit 1
   fi
 }
 
 # update either dots or OS
 update() {
-  if [[ -e "$os/$1/update.sh" ]]; then
-    sh "$os/$1/update.sh"
+  if [[ -e "$os/osx/update.sh" ]]; then
+    sh "$os/osx/update.sh"
   else
     updatedots
   fi
