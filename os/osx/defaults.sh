@@ -247,14 +247,21 @@ echo ":dots: Enabling snap-to-grid for icons on the desktop and in other icon vi
 # Dock & Mission Control
 ###############################################################################
 
+echo ""
 echo ":dots: Wiping all (default) app icons from the Dock"
 # This is only really useful when setting up a new Mac, or if you don't use
 # the Dock to launch apps.
 defaults write com.apple.dock persistent-apps -array
 
 echo ""
-echo ":dots: Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"
-defaults write com.apple.dock tilesize -int 36
+echo ":dots: Move the Dock to the left"
+# This is only really useful when setting up a new Mac, or if you don't use
+# the Dock to launch apps.
+defaults write com.apple.dock orientation -string "left"
+
+echo ""
+echo ":dots: Setting the icon size of Dock items to 58 pixels for optimal size/screen-realestate"
+defaults write com.apple.dock tilesize -int 58
 
 echo ""
 echo ":dots: Speeding up Mission Control animations and grouping windows by application"
