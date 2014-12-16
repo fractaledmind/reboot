@@ -1,36 +1,15 @@
+#!/usr/bin/env bash
 #
 # Binary installer
 #
+set -e
 
-# Check for Homebrew
-if test ! $(which brew); then
-  echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-# Update homebrew
-brew update && brew upgrade brew-cask
-
-# Install GNU core utilities (those that come with OS X are outdated)
-brew install coreutils
-
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew install findutils
-
-# Install Bash 4
-brew install bash
-
-# Install more recent versions of some OS X tools
-brew tap homebrew/dupes
-brew install homebrew/dupes/grep
-
-# Install other useful binaries
+# Binaries
 binaries=(
   rename
   ffmpeg
   python
   python3
-  poppler
   mackup
   pandoc
   trash
@@ -41,48 +20,86 @@ binaries=(
   hub
 )
 
-# Install tesseract ocr engine and all dependencies
-tesseract
+# Main program
+main() {
+  # Update homebrew
+  brew update && brew doctor
 
-# Install the binaries
-brew install ${binaries[@]}
+  # Install tesseract ocr engine and all dependencies
+  tesseract
 
-# Add osx specific command line tools
-if test ! $(which subl); then
-  ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-fi
+  # Install common, core GNU tools
+  echo ":dots: installing GNU tools..."
+  gnu_tools
 
-# Install spot
-if test ! $(which spot); then
-  curl -L https://raw.github.com/guille/spot/master/spot.sh -o /usr/local/bin/spot && chmod +x /usr/local/bin/spot
-fi
+  # Install the binaries
+  echo ":dots: installing binaries..."
+  brew install ${binaries[@]}
 
-# Remove outdated versions from the cellar
-brew cleanup
+  # Add osx specific command line tools
+  echo ":dots: installing command line tools..."
+  command_line_tools
+
+  # Remove outdated versions from the cellar
+  brew cleanup
+}
+
+homebrew() {
+  # Check for Homebrew
+  if test ! $(which brew); then
+    echo ":dots: installing homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+}
 
 tesseract() {
   #!/usr/bin/env bash
   # courtesy of : <https://ryanfb.github.io/etc/2014/11/13/command_line_ocr_on_mac_os_x.html>
 
-  # Ensure `homebrew` is up-to-date and ready
-  echo "Updating homebrew..."
-  brew doctor
-
   # Install leptonica with TIFF support (and every other format, just in case)
-  echo "Installing leptonica..."
+  echo ":dots: installing leptonica..."
   brew install --with-libtiff --with-openjpeg --with-giflib leptonica
 
   # Install Ghostscript
-  echo "Installing ghostscript..."
+  echo ":dots: installing ghostscript..."
   brew install gs
 
   # Install ImageMagick with TIFF and Ghostscript support
-  echo "Installing imagemagick..."
+  echo ":dots: installing imagemagick..."
   brew install --with-libtiff --with-ghostscript imagemagick
 
   # Install Tesseract devel with all languages
-  echo "Installing tesseract..."
+  echo ":dots: installing tesseract..."
   brew install --devel --all-languages tesseract
 }
 
+gnu_tools() {
+  # Install GNU core utilities (those that come with OS X are outdated)
+  brew install coreutils
+
+  # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+  brew install findutils
+
+  # Install Bash 4
+  brew install bash
+
+  # Install more recent versions of some OS X tools
+  brew tap homebrew/dupes
+  brew install homebrew/dupes/grep
+}
+
+command_line_tools() {
+  # Install Sublime Text CLI
+  if test ! $(which subl); then
+    ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+  fi
+
+  # Install spot
+  if test ! $(which spot); then
+    curl -L https://raw.github.com/guille/spot/master/spot.sh -o /usr/local/bin/spot && chmod +x /usr/local/bin/spot
+  fi
+}
+
+
+main "$@"
 exit 0
