@@ -64,7 +64,7 @@ main() {
 
 homebrew() {
   if test ! $(which brew); then
-    echo ":-:dots:-: installing homebrew..."
+    echo ":dots: installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
@@ -72,7 +72,7 @@ homebrew() {
 cask_apps() {
   if test ! $(brew cask --verion); then
     # Install homebrew-cask
-    echo ":-:dots:-: installing cask..."
+    echo ":dots: installing cask..."
     brew install caskroom/cask/brew-cask
 
     # Tap alternative versions
@@ -80,7 +80,7 @@ cask_apps() {
   fi
 
   # install apps
-  echo ":-:dots:-: installing apps..."
+  echo ":dots: installing apps..."
   brew cask install --appdir=$appdir ${apps[@]}
 }
 
@@ -89,7 +89,7 @@ cask_fonts() {
   brew tap caskroom/fonts
 
   # install fonts
-  echo ":-:dots:-: installing fonts..."
+  echo ":dots: installing fonts..."
   brew cask install ${fonts[@]}
 }
 
