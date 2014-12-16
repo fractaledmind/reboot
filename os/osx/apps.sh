@@ -1,10 +1,10 @@
+#!/usr/bin/env bash
 #
 # Application installer (via brew-cask)
 #
-
 set -e
 
-# Apps
+# Appsa
 apps=(
   alfred
   appcleaner
@@ -23,7 +23,7 @@ apps=(
   marked
   nvalt
   omnifocus
-  onepassword
+  1password
   qlmarkdown
   qlstephen
   quicklook-json
@@ -50,54 +50,49 @@ fonts=(
 # Specify the location of the apps
 appdir="/Applications"
 
-# Check for Homebrew
-if test ! $(which brew); then
-  echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
 main() {
 
   # Ensure homebrew is installed
   homebrew
 
-  # Install homebrew-cask
-  echo "installing cask..."
-  brew install caskroom/cask/brew-cask
+  # use cask to install apps
+  cask_apps  
 
-  # Tap alternative versions
-  brew tap caskroom/versions
+  cask_fonts
 
-  # Tap the fonts
-  brew tap caskroom/fonts
-
-  # install apps
-  echo "installing apps..."
-  brew cask install --appdir=$appdir ${apps[@]}
-
-  # install fonts
-  echo "installing fonts..."
-  brew cask install ${fonts[@]}
-
-  # link with alfred
-  alfred
-  cleanup
 }
 
 homebrew() {
   if test ! $(which brew); then
-    echo "Installing homebrew..."
+    echo ":-:dots:-: installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
 
-alfred() {
-  brew cask alfred link
+cask_apps() {
+  if test ! $(brew cask --verion); then
+    # Install homebrew-cask
+    echo ":-:dots:-: installing cask..."
+    brew install caskroom/cask/brew-cask
+
+    # Tap alternative versions
+    brew tap caskroom/versions
+  fi
+
+  # install apps
+  echo ":-:dots:-: installing apps..."
+  brew cask install --appdir=$appdir ${apps[@]}
 }
 
-cleanup() {
-  brew cleanup
+cask_fonts() {
+  # Tap the fonts
+  brew tap caskroom/fonts
+
+  # install fonts
+  echo ":-:dots:-: installing fonts..."
+  brew cask install ${fonts[@]}
 }
+
 
 main "$@"
 exit 0
