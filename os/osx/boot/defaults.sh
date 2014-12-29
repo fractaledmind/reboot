@@ -34,7 +34,6 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 echo ""
 echo ":dots: Disabling OS X Gate Keeper"
-echo ":dots: (You'll be able to install any app you want from here on, not just Mac App Store apps)"
 sudo spctl --master-disable
 sudo defaults write /var/db/SystemPolicy-prefs.plist enabled -string no
 defaults write com.apple.LaunchServices LSQuarantine -bool false
@@ -78,9 +77,9 @@ echo ""
 echo ":dots: Check for software updates daily, not just once per week"
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
-echo ""
-echo ":dots: Removing duplicates in the 'Open With' menu"
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+#echo ""
+#echo ":dots: Removing duplicates in the 'Open With' menu"
+#/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
 echo ""
 echo ":dots: Disabling smart quotes and smart dashes as they're annoying when typing code"
@@ -111,11 +110,11 @@ echo ":dots: Creating a zero-byte file instead"
 sudo touch /Private/var/vm/sleepimage
 echo ":dots: and make sure it can't be rewritten"
 sudo chflags uchg /Private/var/vm/sleepimage
- 
+
 echo ""
 echo ":dots: Disabling the sudden motion sensor (it's not useful for SSDs/current MacBooks)"
 sudo pmset -a sms 0
- 
+
 echo ""
 echo ":dots: Disabling system-wide resume"
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
@@ -123,7 +122,7 @@ defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 echo ""
 echo ":dots: Disabling the menubar transparency"
 defaults write com.apple.universalaccess reduceTransparency -bool true
- 
+
 echo ""
 echo ":dots: Speeding up wake from sleep to 24 hours from an hour"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
@@ -146,7 +145,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 #defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo ""
-echo ":dots: Setting a blazingly fast keyboard repeat rate (ain't nobody got time fo special chars while coding!)"
+echo ":dots: Setting a blazingly fast keyboard repeat rate"
 defaults write NSGlobalDomain KeyRepeat -int 0
 
 echo ""
@@ -165,7 +164,7 @@ defaults write com.apple.BezelServices kDimTime -int 300
 echo ""
 echo ":dots: Disabling display from automatically adjusting brightness"
 sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
- 
+
 echo ""
 echo ":dots: Disabling keyboard from automatically adjusting backlight brightness in low light"
 sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool false
@@ -198,7 +197,7 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 echo ""
 echo ":dots: Showing hidden files in Finder by default"
 defaults write com.apple.Finder AppleShowAllFiles -bool true
- 
+
 echo ""
 echo ":dots: Showing dotfiles in Finder by default"
 defaults write com.apple.finder AppleShowAllFiles TRUE
@@ -325,7 +324,7 @@ echo ""
 echo ":dots: Disabling the annoying backswipe in Chrome"
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
- 
+
 echo ""
 echo ":dots: Using the system-native print preview dialog in Chrome"
 defaults write com.google.Chrome DisablePrintPreview -bool true

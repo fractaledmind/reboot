@@ -6,6 +6,7 @@ set -e
 
 # Binaries
 binaries=(
+  autoenv
   rename
   ffmpeg
   python
@@ -22,10 +23,14 @@ binaries=(
 
 # Main program
 main() {
+  # Ensure homebrew is installed
+  homebrew
+
   # Update homebrew
   brew update && brew doctor
 
   # Install tesseract ocr engine and all dependencies
+  echo ":dots: installing tesseract and dependencies..."
   tesseract
 
   # Install common, core GNU tools
@@ -57,19 +62,15 @@ tesseract() {
   # courtesy of : <https://ryanfb.github.io/etc/2014/11/13/command_line_ocr_on_mac_os_x.html>
 
   # Install leptonica with TIFF support (and every other format, just in case)
-  echo ":dots: installing leptonica..."
   brew install --with-libtiff --with-openjpeg --with-giflib leptonica
 
   # Install Ghostscript
-  echo ":dots: installing ghostscript..."
   brew install gs
 
   # Install ImageMagick with TIFF and Ghostscript support
-  echo ":dots: installing imagemagick..."
   brew install --with-libtiff --with-ghostscript imagemagick
 
   # Install Tesseract devel with all languages
-  echo ":dots: installing tesseract..."
   brew install --devel --all-languages tesseract
 }
 
@@ -99,7 +100,6 @@ command_line_tools() {
     curl -L https://raw.github.com/guille/spot/master/spot.sh -o /usr/local/bin/spot && chmod +x /usr/local/bin/spot
   fi
 }
-
 
 main "$@"
 exit 0

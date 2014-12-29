@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 function osx {
   if [ "$(uname -s)" = "Darwin" ]; then
@@ -6,4 +7,3 @@ function osx {
     echo 0
   fi
 }
-

@@ -23,7 +23,7 @@ EOF
 }
 
 # Manage users
-# 
+#
 # Usage: user add matt
 # Usage: user rm matt
 
@@ -39,7 +39,7 @@ function user {
         ;;
     esac
     shift
-  done  
+  done
 
   # run command
   case $1 in

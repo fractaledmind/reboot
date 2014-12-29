@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 function config {
   if ! [ -f git/gitconfig.symlink ]
   then

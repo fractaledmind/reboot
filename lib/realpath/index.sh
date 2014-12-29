@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Get the realpath because OS X doesn't support readlink -f
 
 function realpath {

@@ -4,7 +4,7 @@
 #
 set -e
 
-# Appsa
+# Apps
 apps=(
   alfred
   appcleaner
@@ -56,7 +56,7 @@ main() {
   homebrew
 
   # use cask to install apps
-  cask_apps  
+  cask_apps
 
   cask_fonts
 

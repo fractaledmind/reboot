@@ -27,7 +27,8 @@ main() {
   # run command
   case $1 in
     reload )
-      source "$HOME/.bash_profile"
+      reload
+      exit
       ;;
     boot )
       boot
@@ -35,6 +36,10 @@ main() {
       ;;
     setup )
       setup
+      exit
+      ;;
+    icons )
+      customize_icons $2
       exit
       ;;
     update )
@@ -48,6 +53,16 @@ main() {
   esac
 }
 
+reload() {
+  # remove old bash profile
+  if [[ -e "$HOME/.bash_profile" ]]; then
+    rm "$HOME/.bash_profile"
+  fi
+  # symlink new profile
+  source "$lib/symlink/index.sh"
+  symlink "$os/osx/boot/profile.sh" "$HOME/.bash_profile"
+  source "$HOME/.bash_profile"
+}
 # usage info
 usage() {
   cat <<EOF
@@ -65,14 +80,15 @@ usage() {
     boot                  Bootstrap the given operating system
     setup                 Finish setup process after Dropbox sync
     update <dots>         Update the os or dots
+    icons <app>           Set custom icon for app
 
 EOF
 }
 
 # Bootstrap the OS
 boot() {
-  if [[ -e "$os/osx/index.sh" ]]; then
-    sh "$os/osx/index.sh"
+  if [[ -e "$os/osx/boot/index.sh" ]]; then
+    sh "$os/osx/boot/index.sh"
   else
     echo "boot: could not find osx boot script!"
     exit 1
@@ -80,18 +96,27 @@ boot() {
 }
 
 setup() {
-  if [[ -e "$os/osx/setup.sh" ]]; then
-    sh "$os/osx/setup.sh"
+  if [[ -e "$os/osx/setup/index.sh" ]]; then
+    sh "$os/osx/setup/index.sh"
   else
     echo "setup: could not find osx setup script!"
     exit 1
   fi
 }
 
+customize_icons() {
+  if [[ -e "$os/osx/icons/index.sh" ]]; then
+    sh "$os/osx/icons/index.sh" $1
+  else
+    echo "icons: could not find osx icons script!"
+    exit 1
+  fi
+}
+
 # update either dots or OS
 update() {
-  if [[ -e "$os/osx/update.sh" ]]; then
-    sh "$os/osx/update.sh"
+  if [[ -e "$os/osx/update/index.sh" ]]; then
+    sh "$os/osx/update/index.sh"
   else
     updatedots
   fi
