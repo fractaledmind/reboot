@@ -1,6 +1,17 @@
 # dots
 
-![image](https://i.cloudup.com/RCpB-ASfme.png)
+.......................................
+.                                     .
+.         :            :              .
+.         :            :              .
+.         :            :    ......    .
+.    ......  ......  .....  :         .
+.    :    :  :    :    :    ......    .
+.    :    :  :    :    :         :    .
+.    ......  ......    :    ......    .
+.                                     .
+.......................................
+
 
 WIP bootstrapping library for osx
 
@@ -36,7 +47,6 @@ The OSX build does the following:
 # Credits
 
 * Original project by [Matthew Mueller](https://github.com/MatthewMueller/)
-* Logo by: [Piotrek Chuchla](http://www.thenounproject.com/pchuchla/)
 
 # License
 
