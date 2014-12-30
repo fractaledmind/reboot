@@ -21,17 +21,18 @@ fi
 # exit 1
 # paths
 osx="$os/osx"
+boot="$osx/boot"
 
 # Run each program
-#sh "$osx/defaults.sh"
-#sh "$osx/binaries.sh"
-#sh "$osx/apps.sh"
-#sh "$osx/pips.sh"
+#sh "$boot/defaults.sh"
+#sh "$boot/binaries.sh"
+#sh "$boot/apps.sh"
+#sh "$boot/pips.sh"
 
 # Symlink the profile
 if [[ ! -e "$HOME/.bash_profile" ]]; then
-  echo ":dots: symlinking \`$osx/boot/profile.sh\` => \`$HOME/.bash_profile\`..."
-  symlink "$osx/boot/profile.sh" "$HOME/.bash_profile"
+  echo ":dots: symlinking \`$boot/profile.sh\` => \`$HOME/.bash_profile\`..."
+  symlink "$boot/profile.sh" "$HOME/.bash_profile"
   source "$HOME/.bash_profile"
 else
   echo ":dots: \`$HOME/.bash_profile\` already exists."
