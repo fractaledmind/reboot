@@ -4,16 +4,22 @@
 #
 set -e
 
+osx="$os/osx"
+setup="$osx/setup"
+
 main() {
 
+  # Run each program
+  bash "$setup/type_icons.sh"
+
   # use mackup to restore configs
-  mac_backup
+  #mac_backup
 
   # link with alfred
-  alfred
+  #alfred
 
   # remove outdated versions from the cellar
-  cleanup
+  #cleanup
 }
 
 mac_backup() {
