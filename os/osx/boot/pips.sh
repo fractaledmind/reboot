@@ -5,14 +5,16 @@
 set -e
 
 pips=(
-	mackup
-	setuptools
+  mackup
+  autoenv
+  setuptools
   virtualenv
-	virtualenvwrapper
+  cookiecutter
+  virtualenvwrapper
 )
 
 main() {
-	echo ":dots: installing global Python modules..."
+  echo ":dots: installing global Python modules..."
   gpip install ${pips[@]}
 }
 

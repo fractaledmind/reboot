@@ -11,7 +11,6 @@ binaries=(
   ffmpeg
   python
   python3
-  mackup
   pandoc
   trash
   tree
