@@ -35,8 +35,14 @@ function symlink {
     shift
   done
 
-  if [[ -e $1 ]] && [[ -n $2 ]]; then
-    ln -s $1 $2
+  # remove original file, if it exists
+  if [[ -e "$2" ]]; then
+    rm "$2"
+  fi
+
+  # symlink existing file to non-existent file
+  if [[ -e "$1" ]] && [[ -n "$2" ]]; then
+    ln -s "$1" "$2"
   else
     echo "unable to symlink"
   fi

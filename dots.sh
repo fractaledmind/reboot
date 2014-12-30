@@ -54,10 +54,6 @@ main() {
 }
 
 reload() {
-  # remove old bash profile
-  if [[ -e "$HOME/.bash_profile" ]]; then
-    rm "$HOME/.bash_profile"
-  fi
   # symlink new profile
   source "$lib/symlink/index.sh"
   symlink "$os/osx/boot/profile.sh" "$HOME/.bash_profile"
